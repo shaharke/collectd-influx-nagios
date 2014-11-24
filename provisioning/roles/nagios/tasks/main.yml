@@ -1,0 +1,13 @@
+---
+- name: insatll nagios
+  apt: name=nagios3
+  sudo: yes
+
+- name: install pip
+  apt: name=python-pip
+  sudo: yes
+
+- name: install influx-nagios-plugin
+  pip: name=influx-nagios-plugin
+  sudo: yes
+

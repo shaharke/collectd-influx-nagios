@@ -1,0 +1,15 @@
+---
+- hosts: influx
+  roles:
+    - common
+    - influx
+
+- hosts: collectd
+  roles:
+    - collectd
+
+- hosts: nagios
+  roles:
+    - nagios
+
+

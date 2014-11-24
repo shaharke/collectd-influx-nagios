@@ -1,0 +1,26 @@
+- name: download influx deb
+  get_url: url="http://s3.amazonaws.com/influxdb/influxdb_latest_amd64.deb" dest="/tmp"
+
+- name: install influx
+  command: dpkg -i /tmp/influxdb_latest_amd64.deb
+  sudo: yes
+
+- name: restart influx
+  service: name=influxdb state=restarted
+  sudo: yes
+
+- name: insatll collectd-influxdb-proxy
+  git: repo=https://github.com/bpaquet/collectd-influxdb-proxy.git dest=/opt/collectd-proxy
+  sudo: yes
+
+- name: chown proxy
+  file: path=/opt/collectd-proxy state=directory owner=vagrant group=vagrant
+  sudo: yes
+
+- name: generate upstart config
+  template: src=collectd-proxy.conf.j2 dest=/etc/init
+  sudo: yes
+
+- name: start collectd-proxy
+  service: name=collectd-proxy state=restarted
+  sudo: yes

@@ -1,0 +1,4 @@
+---
+influx_database: monitoring
+influx_username: root
+influx_password: root

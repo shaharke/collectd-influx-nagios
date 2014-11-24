@@ -1,0 +1,14 @@
+description "collectd-proxy"
+
+start on started networking
+stop on shutdown
+
+chdir /opt/collectd-proxy
+setuid {{ ansible_ssh_user }}
+setgid {{ ansible_ssh_user }}
+
+respawn
+
+script
+  exec node proxy.js --influxdb_db {{ influx_database }} --influxdb_user {{ influx_username }} --influxdb_password {{ influx_password }}
+end script

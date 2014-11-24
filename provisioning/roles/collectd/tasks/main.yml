@@ -1,0 +1,10 @@
+---
+- name: install collectd
+  apt: pkg=collectd
+  sudo: yes
+
+- name: copy configuration file
+  copy: src=collectd.conf dest=/etc/collectd
+  sudo: yes
+  notify:
+    - restart collectd
