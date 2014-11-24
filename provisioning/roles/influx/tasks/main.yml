@@ -18,7 +18,7 @@
   sudo: yes
 
 - name: generate upstart config
-  template: src=collectd-proxy.conf.j2 dest=/etc/init
+  template: src=collectd-proxy.conf.j2 dest=/etc/init/collectd-proxy.conf
   sudo: yes
 
 - name: start collectd-proxy
